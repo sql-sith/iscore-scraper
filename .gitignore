@@ -1,5 +1,6 @@
-# Ignore everything except the script and README
+# Ignore everything except the scripts and README
 *
 !.gitignore
 !scrape-iscore.sh
+!probe-other-teams.sh
 !README.md
