@@ -217,9 +217,11 @@ mkdir -p "$DEST"
 # All HTML pages are fetched in a single wget run so that --convert-links can
 # rewrite links across all of them at once.
 #
-# /scoreboard/ is included explicitly because it's an AJAX fragment (not linked
-# from any page) but contains the links to all team report pages — wget will
-# follow those links and fetch all reports automatically.
+# /scoreboard/ is included explicitly because it is an AJAX fragment (no
+# <html> tag) loaded by the main page with $.get(). wget fetches it as a seed
+# URL but does NOT spider its links, since link-following only works on full
+# HTML documents. Other teams' report pages must be fetched explicitly in
+# Phase 2e.
 # ══════════════════════════════════════════════════════════════════════════════
 log "Phase 1: Mirroring site pages..."
 
@@ -417,6 +419,35 @@ if [[ -n "$COOKIES_FILE" ]]; then
     fi
 fi
 
+# 2e — Other teams' score report pages
+# The scoreboard AJAX fragment is not spidered by wget, so all team report
+# pages must be fetched explicitly. Our own report (TEAM_REPORT_ID) was already
+# fetched by wget via a direct link from blue/index.html.
+SCOREBOARD_INDEX="${DEST}/scoreboard/index.html"
+if [[ -f "$SCOREBOARD_INDEX" ]]; then
+    log "  Fetching other teams' score report pages..."
+    REPORT_IDS=$(grep -oP 'reports/team/\K[0-9]+' "$SCOREBOARD_INDEX" | sort -un || true)
+    REPORT_OK=0; REPORT_WARN=0
+    for id in $REPORT_IDS; do
+        [[ "$id" == "$TEAM_REPORT_ID" ]] && continue   # wget already fetched ours
+        mkdir -p "${DEST}/reports/team/${id}"
+        outfile="${DEST}/reports/team/${id}/index.html"
+        if curl "${CURL_ARGS[@]}" "${SITE_URL}/reports/team/${id}/" \
+                -o "$outfile" 2>/dev/null \
+           && [[ -s "$outfile" ]] \
+           && ! is_login_page "$outfile"; then
+            (( REPORT_OK++ )) || true
+        else
+            warn "  report ${id}: fetch failed or got login page"
+            rm -f "$outfile"
+            (( REPORT_WARN++ )) || true
+        fi
+    done
+    log "  Other team reports: ${REPORT_OK} saved, ${REPORT_WARN} warnings"
+else
+    warn "  scoreboard not found — other teams' report pages not fetched"
+fi
+
 log "Phase 2 complete."
 echo
 
@@ -457,6 +488,19 @@ if [[ -f "$BLUE_INDEX" ]]; then
         sed -i "s|href=\"submit/${type}/\([0-9]*\)/index\.html\"|href=\"submit/${type}/\1/\"|g" "$BLUE_INDEX"
     done
     log "  Rewrote submit links in blue/index.html to trailing-slash form"
+fi
+
+# Fix scoreboard's absolute https:// team-report links.
+# wget --convert-links only rewrites root-relative (/path) hrefs, not fully-
+# qualified https://domain/path URLs. The scoreboard is also an AJAX fragment,
+# so wget may not process its links at all. Rewrite to root-relative paths
+# (not file-relative) because the fragment is injected into index.html at the
+# archive root via $.get().
+SCOREBOARD_HTML="${DEST}/scoreboard/index.html"
+if [[ -f "$SCOREBOARD_HTML" ]]; then
+    sed -i 's|href="https://iscore\.iseage\.org/reports/team/\([0-9]*/\)"|href="reports/team/\1index.html"|g' \
+        "$SCOREBOARD_HTML"
+    log "  Fixed absolute team-report links in scoreboard/index.html"
 fi
 
 # 3b — Fix hardcoded /static/tz absolute path in chart pages
@@ -517,6 +561,55 @@ if [[ -n "$COOKIES_FILE" ]]; then
     done
     log "  Fixed paths in ${SUBMIT_PAGES_FIXED} submission page(s)"
 fi
+
+# 3e — Fix absolute paths in other teams' report pages (Phase 2e fetches)
+# These pages sit at reports/team/{id}/index.html (depth 3 from root) but are
+# NOT inside /blue/, so fix_curl_page's bp-based blue/ links are wrong for
+# them. All blue/ nav links must use the full rp prefix (../../blue/...).
+# Also, the breadcrumb self-link uses each team's own report ID, not ours.
+REPORT_PAGES_FIXED=0
+for f in "${DEST}/reports/team"/*/index.html; do
+    [[ -f "$f" ]] || continue
+    id=$(basename "$(dirname "$f")")
+    [[ "$id" == "$TEAM_REPORT_ID" ]] && continue   # wget handled ours
+    is_login_page "$f" && continue
+
+    # Static assets
+    sed -i "s|href=\"/static/|href=\"../../static/|g" "$f"
+    sed -i "s|src=\"/static/|src=\"../../static/|g"   "$f"
+
+    # Root-level nav
+    sed -i "s|href=\"/\"|href=\"../../index.html\"|g"                                               "$f"
+    sed -i "s|href=\"/logout/\"|href=\"../../logout/index.html\"|g"                                 "$f"
+    sed -i "s|href=\"/messages/\"|href=\"../../messages/index.html\"|g"                             "$f"
+    sed -i "s|href=\"/user_profile/\"|href=\"../../user_profile/index.html\"|g"                     "$f"
+    sed -i "s|href=\"/red/wiki/\"|href=\"../../red/wiki/index.html\"|g"                             "$f"
+    sed -i "s|href=\"/services/status/\"|href=\"../../services/status/index.html\"|g"               "$f"
+
+    # Statistics section
+    sed -i "s|href=\"/statistics/trends/\"|href=\"../../statistics/trends/index.html\"|g"           "$f"
+    sed -i "s|href=\"/statistics/flag/\"|href=\"../../statistics/flag/index.html\"|g"               "$f"
+    sed -i "s|href=\"/statistics/anomalies/\"|href=\"../../statistics/anomalies/index.html\"|g"     "$f"
+    sed -i "s|href=\"/statistics/availability/\"|href=\"../../statistics/availability/index.html\"|g" "$f"
+
+    # Blue team section — full rp prefix since we are NOT inside /blue/
+    sed -i "s|href=\"/blue/\"|href=\"../../blue/index.html\"|g"                                     "$f"
+    sed -i "s|href=\"/blue/tsi/\"|href=\"../../blue/tsi/index.html\"|g"                             "$f"
+    sed -i "s|href=\"/blue/anomalies/\"|href=\"../../blue/anomalies/index.html\"|g"                 "$f"
+    sed -i "s|href=\"/blue/usability/\"|href=\"../../blue/usability/index.html\"|g"                 "$f"
+    sed -i "s|href=\"/blue/dns/\"|href=\"../../blue/dns/index.html\"|g"                             "$f"
+    sed -i "s|href=\"/blue/teaminfo/\"|href=\"../../blue/teaminfo/index.html\"|g"                   "$f"
+    sed -i "s|href=\"/blue/download/flags/\"|href=\"../../blue/download/flags/index.html\"|g"       "$f"
+    sed -i "s|href=\"/blue/summary\"|href=\"../../blue/summary.html\"|g"                            "$f"
+
+    # Self-link first (this team's own report ID → ./), then remaining report
+    # links (shouldn't exist, but catch them anyway) → our team's report
+    sed -i "s|href=\"/reports/team/${id}/\"|href=\"./\"|g"                                         "$f"
+    sed -i "s|href=\"/reports/team/[0-9]*/\"|href=\"../../reports/team/${TEAM_REPORT_ID}/index.html\"|g" "$f"
+
+    (( REPORT_PAGES_FIXED++ )) || true
+done
+log "  Fixed paths in ${REPORT_PAGES_FIXED} other team report page(s)"
 
 log "Phase 3 complete."
 echo
