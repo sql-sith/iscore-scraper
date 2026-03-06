@@ -1,0 +1,527 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Anomaly Overview - IScorE</title>
+    <meta charset="UTF-8" />
+
+    <meta property="og:image" content="/static/img/iscore1_small.png"/>
+    <meta property="og:title" content="Anomaly Overview"/>
+    <meta property="og:url" content="http://iscore.iseage.org/blue/anomalies/"/>
+
+    <link rel="icon" href="../../static/img/favicon.png"/>
+    <link rel="manifest" href="../../static/manifest.json" />
+
+    <link rel="stylesheet" href="../../static/CACHE/css/output.3d0579470055.css" type="text/css">
+
+    
+</head>
+<body>
+<input type="hidden" id="applicationServerKey" value="BIl3fUZ225yzs0YYIg4FjdvSfNhs-6Kb7zpDZO9nXel0K6fMdqo-nwYLzfmv0m2bQg3qJyPB9Gi8cc572maWsKw" />
+
+
+<div id="header">
+    <a href="../../index.html">
+        
+            <img src="../../static/img/iscore1_small.png" alt="IScorE" width="170"
+                 style="margin-top: 20px; margin-left: 20px;"/>
+        
+    </a>
+</div>
+
+<div id="sidebar">
+    <a href="#" class="visible-xs"><i class="icon-home"></i> Anomaly Overview</a>
+    <ul>
+        <li class=""><a href="../../index.html"><i
+                class="icon-list"></i>Scoreboard</a></li>
+        <li class="submenu">
+            <a href="#"><i class="icon icon-bar-chart"></i><span>Charts & Graphs</span></a>
+            <ul>
+                <li class=""><a
+                        href="../../statistics/trends/index.html">Score Trends</a></li>
+                <li class=""><a
+                        href="../../statistics/flag/index.html">Flags</a></li>
+                <li class=""><a
+                        href="../../statistics/anomalies/index.html">Anomalies</a></li>
+                <li class=""><a
+                        href="../../statistics/availability/index.html">Availability</a></li>
+            </ul>
+        </li>
+        <li class=""><a href="../../services/status/index.html"><i
+                class="icon-check"></i>Service Status</a></li>
+        
+            <li class=""><a href="../../red/wiki/index.html"><i
+                    class="icon-edit"></i>Red Wiki</a></li>
+        
+        
+
+        
+            <li class=""><a href="../../user_profile/index.html"><i
+                    class="icon-user"></i> User Profile</a></li>
+            <li>&nbsp;</li>
+        
+
+        <!-- Blue Team Area -->
+        
+            
+        <li class=""><a href="../../blue/index.html"><i
+                class="icon-th"></i> Dashboard</a></li>
+        <li class=""><a href="../tsi/index.html"><i
+                class="icon-credit-card"></i> Team Specific Info</a></li>
+        <li class="active"><a href="index.html"><i
+                class="icon-asterisk"></i> Anomalies</a></li>
+        <li class=""><a href="../usability/index.html"><i
+                class="icon-check"></i> Usability </a></li>
+        <li class=""><a href="../dns/index.html"><i
+                class="icon-wrench"></i> DNS Records</a></li>
+        <li class=""><a href="../teaminfo/index.html"><i
+                class="icon-pencil"></i> Team Info</a></li>
+        <li class=""><a
+                href="../download/flags/index.html"><i class="icon-download-alt"></i> Download Flags</a></li>
+        
+            <li class=""><a
+                    href="../../reports/team/1004/index.html"><i class="icon-list-alt"></i> Score Report</a></li>
+        
+        
+            <li class=""><a
+                    href="../summary.html"><i class="icon-flag"></i> Red Summary</a></li>
+        
+        
+        
+
+        <!-- Red Team Area -->
+        
+
+        <!-- Green Team Area -->
+        
+
+        <!-- White Team Area -->
+        
+
+        <!-- CDC Admin Area -->
+        
+
+
+    </ul>
+    <!-- Sponsor Area -->
+    
+        <div class="sponsor-logos" style="width: inherit">
+            <div class="sponsor-header">
+                Generously Sponsored By:
+            </div>
+
+            <div class="carousel slide sponsor-images">
+                <div class="carousel-inner" style="height: 80px">
+                    
+                        <div class="item active">
+                            <a href=https://www.collinsaerospace.com/ target="_blank">
+                                <img class="item active  center-block"
+                                     id="sponsor_3" src="../../static/upload/sponsorlogos/CA-Logo_rgb-black_x2qdaZd.png"
+                                     height="" style="margin: auto;None"
+                                     alt="Collins"/>
+                            </a>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+
+<div id="content" style="min-height:1000px;">
+     
+        <div id="content-header">
+            <h1>Anomaly Overview</h1>
+
+            <div>
+                
+                <div class="btn-group">
+
+                    
+                        
+<a class="btn btn-default btn-large dropdown-toggle" data-toggle="dropdown" href="#">Messages</a>
+    <ul class="dropdown-menu" id="message-dropdown">
+    
+        <li class="message-empty">No new messages</li>
+    
+        <li class="divider"></li>
+        <li><a href="../../messages/index.html">See All Messages</a></li>
+    </ul>
+
+                        <a class="btn btn-default btn-large" href="../../logout/index.html">Logout</a>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+
+        
+
+        <div id="breadcrumb">
+            
+            <a href="../../index.html">Home</a><a href="../../blue/index.html">Team 24 Dashboard</a><a href="index.html" class="current">Anomaly Overview</a>
+            
+                <span class="pull-right" style="margin-top: 7px; margin-right: 20px">Logged in as: sky.kaptin</span>
+            
+        </div>
+
+        <!-- Debug bar to see what you are logged in as -->
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+
+                    
+
+    <div class="widget-box page-widget">
+        <div class="widget-title">
+        <span class="icon">
+            <i class="icon-asterisk"></i>
+        </span>
+            <h5>Anomalies</h5>
+        </div>
+        <div class="widget-content">
+            <table class="table table-bordered table-fixed-header">
+
+                <thead>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Expire Time</th>
+                    <th>Required</th>
+                    <th>Status</th>
+                    <th style="width: 200px">Actions</th>
+                </thead>
+
+                <tbody>
+                
+                    <tr>
+                        <td><a href="1378/index.html">Feedback Loop</a></td>
+                        <td>10</td>
+                        <td>01:50 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1378/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="IvbEFmedGbeWOBlEqfrf2x5Jt9KFXeC2DGKhrssC7S8L1GyzFH4fLeeVE2TRulDE" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1375/index.html">Bank Heist</a></td>
+                        <td></td>
+                        <td>01:50 PM</td>
+                        <td>False</td>
+                        <td>Awaiting Submission</td>
+                        <td><form action="/blue/anomalies/1375/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="OwdcvojAWrQWL986XCnlUrQahWDQTJl7JHMPhuxZn8KLYel1c40lD8ZmsPM2qQmJ" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1376/index.html">Plus and Minus</a></td>
+                        <td>0</td>
+                        <td>02:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1376/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="tn4r5Um1oOhvhsNFPu0RZb2zYAFEdJwIoyD4R0AqPvbkux0A4WDRISbL9tOQKQxk" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1373/index.html">Not Not</a></td>
+                        <td>15</td>
+                        <td>01:30 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1373/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="wg457hoigJ4FecIywsSEWShd5uSA93kyrrDITnCHHqYurhVtLUvEFzqpgn1MGala" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1374/index.html">PIN Possesion</a></td>
+                        <td>25</td>
+                        <td>02:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1374/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="NYHootPxdiiMV9C3OUO5uh0R40hJ6MYWI9g1az3WEZcB8ePY3mr5dY93fTqVDTZy" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1372/index.html">Super Steganography</a></td>
+                        <td>20</td>
+                        <td>01:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1372/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="uBDqNa9Ip2G13AbMwosx8pUjnuftfCkrpMc3zgn7QJAQgFoHLQ5xR63vynoFMJl3" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1377/index.html">Retro vibe code</a></td>
+                        <td>10</td>
+                        <td>01:50 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1377/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="xTXmu2cdZhRgpWA4nm0zenMAg8YwicROs4wZg8qCqYL5C1NZCODzX4VMr17IPjSq" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1386/index.html">Green Team Memes</a></td>
+                        <td>0</td>
+                        <td>01:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1386/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="DmcAfbIvgXdiRTdeE75YcXQ64z7AipKAyxLd1hWUHE774Yq9TzIYVEZifsgMPwLc" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1388/index.html">Red Team Memes</a></td>
+                        <td>0</td>
+                        <td>01:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1388/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="ephxsLbK9PPlVIAB2dyYUX7vejEAhpHY9AQaeRp9AwJa8NNwhFbYDEgHpcNMOwIA" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1387/index.html">White Team Memes</a></td>
+                        <td></td>
+                        <td>01:00 PM</td>
+                        <td>False</td>
+                        <td>Pending Review</td>
+                        <td><form action="/blue/anomalies/1387/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="g8ozwe6HonryFegmeYLZgT7LicTiRvW2bjXcikk6P4lnSjthtqoZZAgXt52uoCXE" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1370/index.html">Telegram for you</a></td>
+                        <td>0</td>
+                        <td>12:30 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1370/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="GiBpzVuT8xmxbOZSAfhB80GUL5nTXEMfBta2l1IizegmoTcNPHUBRHP6WYw5uLNR" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1369/index.html">Numbers</a></td>
+                        <td>10</td>
+                        <td>12:30 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1369/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="erDbXUQJSbqFMTYSxkEHEXWU3xYDlMzW9CcOJ048jSkuZYbNMMhHnE56eq7PSTAy" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1371/index.html">USB Scavenger Hunt</a></td>
+                        <td>40</td>
+                        <td>01:50 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1371/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="1g0jC10k53tfbyfht4ZfhfifHT5Rmr3DWrzWo7eJwKn4oDscIwCf0WrrSMe3Ty4f" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1389/index.html">Cyber Trivia (Optional)</a></td>
+                        <td></td>
+                        <td>11:00 AM</td>
+                        <td>False</td>
+                        <td>Pending Review</td>
+                        <td><form action="/blue/anomalies/1389/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="0PxCuXkpSS5fTlNut8efRdWXO8cgSJdTV06fg3yOjzZ46q0pIARfAU59Z1lspQev" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1368/index.html">Party Time!</a></td>
+                        <td>15</td>
+                        <td>12:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1368/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="NzD8KpuD8YFgCHH5LFlsnq1zFT6VZW2HIKcLwvI2zFz5PMU007Ys67aLQMf7w33j" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1367/index.html">Biohacking</a></td>
+                        <td>10</td>
+                        <td>12:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1367/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="WYVG9KAGLDfNVG1F0eye230C28RqKLNRR9ujVQO5ck9C8LeAfGbeLK9Od10ChSOt" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1366/index.html">IoT Hacking</a></td>
+                        <td>25</td>
+                        <td>12:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1366/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="t7Fbyu0Es7PfTXJSmk2IFJOy1LWQr93ooieOkAe3TOJ462WNBMFIoqXKcE52Yg40" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1365/index.html">😀</a></td>
+                        <td>0</td>
+                        <td>12:00 PM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1365/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="AspOSu1j1ztKhaQvuW2FRwDEJofUN9yWvDYrEAfIsgnzuf3qJoFFAdMQUho6kgzy" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1364/index.html">In my element</a></td>
+                        <td>10</td>
+                        <td>09:00 AM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1364/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="DXhlf6z8lEipFZ4o4ShxbkreLPxThJrzy8QY1cNxMlceS4hjjkUxU1AqWIG5OQsb" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1362/index.html">GPTerminal</a></td>
+                        <td>10</td>
+                        <td>09:00 AM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1362/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="nDT44XOXvZQ4flugdUFOZTofrZvzpCNciOsHQ32mWGKTsqHbsmiOIAxrCSELWJOO" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1363/index.html">Floppy Disk Returns</a></td>
+                        <td>15</td>
+                        <td>09:00 AM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1363/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="EZjEDKCVAzE3tfqOhuaxYMTSngPU4d2JzaShpQQk1gySGkDJwWNxHt24y9Y6Bk3l" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1360/index.html">TCP Dump</a></td>
+                        <td>15</td>
+                        <td>08:30 AM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1360/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="8aobyIqimdXeSDLcCCmVUzYBu7d3Bb6D3lXOkOEHNUR35IY7R4ZVDg7NF0mf8i7f" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1361/index.html">Help green team</a></td>
+                        <td>3</td>
+                        <td>08:30 AM</td>
+                        <td>False</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1361/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="NopIAVCMdXT6LPkVBmb5UcKhuB77VQhUIzYlm1QbEENVYUxQQOO5DTTtFugjsXiw" /><div class="btn-group"><input class="btn btn-primary disabled" type="submit" name="accept_status" value="Accept" disabled="disabled" /><input class="btn btn-danger disabled" type="submit" name="accept_status" value="Decline" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1358/index.html">Heartbeat</a></td>
+                        <td>5</td>
+                        <td>07:00 AM</td>
+                        <td>True</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1358/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="ZsTJDdt0q6ql4icInUCPDqQaYUXaS7cEUDsmpjHpRNkahnpDCmfPm7Zm9N6mpedg" /><div class="btn-group"><input class="btn btn-danger disabled" type="submit" name="" value="Required Anomoly" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                    <tr>
+                        <td><a href="1359/index.html">Completeness Check</a></td>
+                        <td>5</td>
+                        <td>07:00 AM</td>
+                        <td>True</td>
+                        <td>Graded</td>
+                        <td><form action="/blue/anomalies/1359/accept_decline/?return_url=/blue/anomalies/" method="POST"><input type="hidden" name="csrfmiddlewaretoken" value="HyoUigFltRXSKiwqJannjVOPMbQwHpTECJXx4mTKUyRHXnJlYC0n2CX1X4ZIewUg" /><div class="btn-group"><input class="btn btn-danger disabled" type="submit" name="" value="Required Anomoly" disabled="disabled"/></div></form></td>
+                    </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+        
+        
+
+        <div class="modal" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Delete </h3>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    Are you sure you want to delete ""?
+                    <input type="hidden" name="csrfmiddlewaretoken" value="u770fqEvl7KNAI0wMeiFnwxI7fci3i7mpiGD1wSUMOECNNdr1GVF6dGUi8luAp8Y">
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="submit" class="btn btn-danger" value="Delete" />
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+<script src="../../static/CACHE/js/output.e94d0ddd61c0.js"></script>
+
+
+    <script src="../../static/scripts/iscore-notifications.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+
+    $(document).ready(function () {
+
+        
+            $('.carousel').carousel({
+                interval: 3000});
+        
+
+        //setup content height
+        $(window).resize(function () {
+            var new_height = $(window).height() - 55;
+            if (new_height < 675) new_height = 675;
+            $("#content").css('min-height', new_height);
+        });
+
+        $(window).trigger('resize');
+
+        $('input.datepicker-input').datepicker({orientation: "bottom auto"});
+        $('.notifications').each(function () {
+            var that = $(this);
+            var message = that.attr('data-row');
+            var color = that.attr('title');
+            that.notify({
+                message: {text: message},
+                type: color,
+                fadeOut: {enabled: true, delay: 4500}
+            }).show();
+        });
+
+        $('.preview-tab').on('click', function () {
+            var that = $(this);
+            var preview = $(that.attr('href'));
+            var edit = preview.siblings('.tab-pane');
+            var textarea = $('textarea', edit);
+            $('.markdown-content', preview).html(marked(textarea.val()));
+        });
+
+        $('.markdown-content').each(function (i, e) {
+            var item = $(e);
+            item.html(marked(item.html()));
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
