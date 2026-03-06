@@ -1,0 +1,11 @@
+{
+  "name": "IScorE",
+  "short_name": "IScorE",
+  "icons": [{
+    "src": "static/img/favicon.png",
+    "sizes": "40x40",
+    "type": "image/png"
+  }],
+  "start_url": "/",
+  "display": "standalone"
+}

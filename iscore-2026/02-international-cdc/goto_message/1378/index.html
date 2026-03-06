@@ -1,0 +1,148 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> - IScorE</title>
+    <meta charset="UTF-8" />
+
+    <meta property="og:image" content="/static/img/iscore1_small.png"/>
+    <meta property="og:title" content=""/>
+    <meta property="og:url" content=""/>
+
+    <link rel="icon" href="/static/img/favicon.png"/>
+    <link rel="manifest" href="/static/manifest.json" />
+
+    <link rel="stylesheet" href="/static/CACHE/css/output.3d0579470055.css" type="text/css">
+
+    
+</head>
+<body>
+<input type="hidden" id="applicationServerKey" value="" />
+
+
+<div id="header">
+    <a href="/">
+        
+            <img src="/static/img/iscore1_small.png" alt="IScorE" width="170"
+                 style="margin-top: 20px; margin-left: 20px;"/>
+        
+    </a>
+</div>
+
+<div id="sidebar">
+    <a href="#" class="visible-xs"><i class="icon-home"></i> </a>
+    <ul>
+        <li class=""><a href="/"><i
+                class="icon-list"></i>Scoreboard</a></li>
+        <li class="submenu">
+            <a href="#"><i class="icon icon-bar-chart"></i><span>Charts & Graphs</span></a>
+            <ul>
+                <li class=""><a
+                        href="/statistics/trends/">Score Trends</a></li>
+                <li class=""><a
+                        href="/statistics/flag/">Flags</a></li>
+                <li class=""><a
+                        href="/statistics/anomalies/">Anomalies</a></li>
+                <li class=""><a
+                        href="/statistics/availability/">Availability</a></li>
+            </ul>
+        </li>
+        <li class=""><a href="/services/status/"><i
+                class="icon-check"></i>Service Status</a></li>
+        
+        
+
+        
+
+        <!-- Blue Team Area -->
+        
+
+        <!-- Red Team Area -->
+        
+
+        <!-- Green Team Area -->
+        
+
+        <!-- White Team Area -->
+        
+
+        <!-- CDC Admin Area -->
+        
+
+
+    </ul>
+    <!-- Sponsor Area -->
+    
+</div>
+
+
+
+
+
+<div id="content" style="min-height:1000px;">
+    
+
+    <div class="container-fluid">
+        <div class="col-md-2 col-md-offset-2" style="margin-top: 350px;">
+            <span style="font-size: 360px; font-weight: bold; color: #444444;">404</span>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="/static/CACHE/js/output.e94d0ddd61c0.js"></script>
+
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+
+    $(document).ready(function () {
+
+        
+
+        //setup content height
+        $(window).resize(function () {
+            var new_height = $(window).height() - 55;
+            if (new_height < 675) new_height = 675;
+            $("#content").css('min-height', new_height);
+        });
+
+        $(window).trigger('resize');
+
+        $('input.datepicker-input').datepicker({orientation: "bottom auto"});
+        $('.notifications').each(function () {
+            var that = $(this);
+            var message = that.attr('data-row');
+            var color = that.attr('title');
+            that.notify({
+                message: {text: message},
+                type: color,
+                fadeOut: {enabled: true, delay: 4500}
+            }).show();
+        });
+
+        $('.preview-tab').on('click', function () {
+            var that = $(this);
+            var preview = $(that.attr('href'));
+            var edit = preview.siblings('.tab-pane');
+            var textarea = $('textarea', edit);
+            $('.markdown-content', preview).html(marked(textarea.val()));
+        });
+
+        $('.markdown-content').each(function (i, e) {
+            var item = $(e);
+            item.html(marked(item.html()));
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

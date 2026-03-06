@@ -4,6 +4,7 @@
 !scrape-iscore.sh
 !probe-other-teams.sh
 !README.md
-!iscore-international-2026/
-!iscore-international-2026/**
+!iscore-2026/
+!iscore-2026/02-international-cdc/
+!iscore-2026/02-international-cdc/**
 
