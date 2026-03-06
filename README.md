@@ -26,9 +26,10 @@ brew install wget curl
 Output goes to `iscore-YYYY/` by default. To preview it locally:
 
 ```bash
-cd iscore-2026
+cd iscore-YYYY/iscore.iseage.org/
 python3 -m http.server 8080
 # open http://localhost:8080/iscore.iseage.org/
+# Ctrl-C in the Python window when you want to close the web server.
 ```
 
 ---

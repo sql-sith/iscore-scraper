@@ -15,6 +15,7 @@
 #   -o DIR    Output directory             (default: iscore-YYYY)
 #   -r ID     Team score report ID         (default: 1004)
 #   -w N      Wait N seconds between wget requests to be polite  (default: 1)
+#   -i        Insecure mode (skip certificate checks)
 #   -n        Non-interactive: skip cookie re-prompt on session expiry
 #   -h        Show this help
 #
@@ -30,6 +31,7 @@ COOKIES_FILE=""
 WAIT=1
 TEAM_REPORT_ID="1004"   # ID in /reports/team/{id}/ — appears in nav links
 INTERACTIVE=true
+INSECURE=false
 
 # ── Argument parsing ───────────────────────────────────────────────────────────
 usage() {
@@ -37,18 +39,44 @@ usage() {
     exit 0
 }
 
-while getopts "u:c:o:r:w:nh" opt; do
-    case $opt in
-        u) SITE_URL="${OPTARG%/}" ;;   # strip trailing slash if present
-        c) COOKIES_FILE="$OPTARG" ;;
-        o) OUTPUT_DIR="$OPTARG" ;;
-        r) TEAM_REPORT_ID="$OPTARG" ;;
-        w) WAIT="$OPTARG" ;;
-        n) INTERACTIVE=false ;;
-        h) usage ;;
-        *) echo "Unknown option: -$OPTARG" >&2; exit 1 ;;
-    esac
+set -euo pipefail
+
+INSECURE=false
+INTERACTIVE=true
+
+# the leading colon captures options that require arguments but none is supplied:
+while getopts ":u:c:o:r:w:nih" opt; do
+  case "$opt" in
+    u) SITE_URL="${OPTARG%/}" ;;   # strip trailing slash if present
+    c) COOKIES_FILE="$OPTARG" ;;
+    o) OUTPUT_DIR="$OPTARG" ;;
+    r) TEAM_REPORT_ID="$OPTARG" ;;
+    w) WAIT="$OPTARG" ;;
+    n) INTERACTIVE=false ;;       # pure flag
+    i) INSECURE=true ;;           # pure flag
+    h) usage; exit 0 ;;
+
+    :)  # missing argument for an option that requires one
+        echo "Option -$OPTARG requires an argument." >&2
+        usage >&2
+        exit 2
+        ;;
+
+    \?) # unknown option
+        echo "Unknown option: -$OPTARG" >&2
+        usage >&2
+        exit 2
+        ;;
+  esac
 done
+
+# shift out parsed options to check for unexpected ("extra") arguments:
+shift $((OPTIND - 1))
+if (($#)); then
+  echo "Unexpected argument(s): $*" >&2
+  usage >&2
+  exit 2
+fi
 
 # ── Prerequisites ──────────────────────────────────────────────────────────────
 for cmd in wget curl grep sed; do
@@ -88,62 +116,89 @@ if [[ -n "$COOKIES_FILE" ]]; then
     CURL_ARGS+=( --cookie "$COOKIES_FILE" )
 fi
 
-# ── fix_curl_page DEPTH SELF_LINK_SED_CMD FILE ────────────────────────────────
+if [[ "$INSECURE" == "true" ]]; then
+    WGET_ARGS+=( --no-check-certificate )
+    CURL_ARGS+=( --insecure )
+fi
+
+# ── fix_page FILE ─────────────────────────────────────────────────────────────
 # Rewrites absolute root-relative hrefs/srcs in a curl-fetched HTML page to
 # relative paths. Unlike wget --convert-links, curl does no rewriting, so every
 # curl-fetched page requires this post-processing step.
 #
-#   DEPTH              directory depth from archive root
-#                      (e.g. 3 for blue/anomalies/{id}/index.html,
-#                            4 for blue/submit/{type}/{id}/index.html)
-#   SELF_LINK_SED_CMD  a complete sed substitution command (including the s|...|
-#                      delimiters) that rewrites the breadcrumb link pointing at
-#                      the current page to href="./"
-#   FILE               path to the HTML file to fix in-place
-fix_curl_page() {
-    local depth=$1 self_cmd=$2 f=$3
+# The correct relative prefix depends on the file's depth in the archive tree,
+# which this function derives automatically from the file path. It also detects
+# whether the page lives inside /blue/ so that blue-subsection nav links get
+# the right prefix.
+#
+# Running this on a wget-processed page is always safe: wget already rewrote
+# all absolute paths to relative ones, so none of the patterns will match.
+#
+#   FILE  absolute path to the HTML file to fix in-place
+fix_page() {
+    local f=$1
 
-    # Build the root prefix: depth repetitions of "../"
+    # Derive depth from the path relative to $DEST.
+    # e.g. blue/anomalies/42/index.html → rel_dir=blue/anomalies/42 → depth 3
+    local rel="${f#"${DEST}/"}"
+    local rel_dir="${rel%/index.html}"
+    local slash_count
+    slash_count=$(tr -dc '/' <<< "$rel_dir" | wc -c)
+    local depth=$(( slash_count + 1 ))
+
+    # Root prefix: depth repetitions of "../"
     local rp=''
     for (( i = 0; i < depth; i++ )); do rp="${rp}../"; done
 
-    # Blue-section prefix: one level shallower (pages are already inside blue/)
-    local bp=''
-    for (( i = 0; i < depth - 1; i++ )); do bp="${bp}../"; done
+    # Blue-section prefix for sub-pages of /blue/ (e.g. /blue/tsi/, /blue/anomalies/).
+    # Pages inside /blue/ can drop the "blue/" component; pages outside need the
+    # full rp + "blue/" path.
+    local bp
+    if [[ "$rel_dir" == blue/* ]]; then
+        bp=''
+        for (( i = 0; i < depth - 1; i++ )); do bp="${bp}../"; done
+    else
+        bp="${rp}blue/"
+    fi
 
     # Static assets
     sed -i "s|href=\"/static/|href=\"${rp}static/|g"   "$f"
     sed -i "s|src=\"/static/|src=\"${rp}static/|g"     "$f"
 
     # Root-level nav links
-    sed -i "s|href=\"/\"|href=\"${rp}index.html\"|g"                                     "$f"
-    sed -i "s|href=\"/logout/\"|href=\"${rp}logout/index.html\"|g"                       "$f"
-    sed -i "s|href=\"/messages/\"|href=\"${rp}messages/index.html\"|g"                   "$f"
-    sed -i "s|href=\"/user_profile/\"|href=\"${rp}user_profile/index.html\"|g"           "$f"
-    sed -i "s|href=\"/red/wiki/\"|href=\"${rp}red/wiki/index.html\"|g"                   "$f"
-    sed -i "s|href=\"/services/status/\"|href=\"${rp}services/status/index.html\"|g"     "$f"
+    sed -i "s|href=\"/\"|href=\"${rp}index.html\"|g"                                                 "$f"
+    sed -i "s|href=\"/logout/\"|href=\"${rp}logout/index.html\"|g"                                   "$f"
+    sed -i "s|href=\"/messages/\"|href=\"${rp}messages/index.html\"|g"                               "$f"
+    sed -i "s|href=\"/user_profile/\"|href=\"${rp}user_profile/index.html\"|g"                       "$f"
+    sed -i "s|href=\"/red/wiki/\"|href=\"${rp}red/wiki/index.html\"|g"                               "$f"
+    sed -i "s|href=\"/services/status/\"|href=\"${rp}services/status/index.html\"|g"                 "$f"
 
     # Statistics section
-    sed -i "s|href=\"/statistics/trends/\"|href=\"${rp}statistics/trends/index.html\"|g"          "$f"
-    sed -i "s|href=\"/statistics/flag/\"|href=\"${rp}statistics/flag/index.html\"|g"              "$f"
-    sed -i "s|href=\"/statistics/anomalies/\"|href=\"${rp}statistics/anomalies/index.html\"|g"    "$f"
+    sed -i "s|href=\"/statistics/trends/\"|href=\"${rp}statistics/trends/index.html\"|g"             "$f"
+    sed -i "s|href=\"/statistics/flag/\"|href=\"${rp}statistics/flag/index.html\"|g"                 "$f"
+    sed -i "s|href=\"/statistics/anomalies/\"|href=\"${rp}statistics/anomalies/index.html\"|g"       "$f"
     sed -i "s|href=\"/statistics/availability/\"|href=\"${rp}statistics/availability/index.html\"|g" "$f"
 
-    # Blue team section (nav links within /blue/; use bp since we're already inside blue/)
-    sed -i "s|href=\"/blue/\"|href=\"${rp}blue/index.html\"|g"                           "$f"
-    sed -i "s|href=\"/blue/tsi/\"|href=\"${bp}tsi/index.html\"|g"                        "$f"
-    sed -i "s|href=\"/blue/anomalies/\"|href=\"${bp}anomalies/index.html\"|g"            "$f"
-    sed -i "s|href=\"/blue/usability/\"|href=\"${bp}usability/index.html\"|g"            "$f"
-    sed -i "s|href=\"/blue/dns/\"|href=\"${bp}dns/index.html\"|g"                        "$f"
-    sed -i "s|href=\"/blue/teaminfo/\"|href=\"${bp}teaminfo/index.html\"|g"              "$f"
-    sed -i "s|href=\"/blue/download/flags/\"|href=\"${bp}download/flags/index.html\"|g"  "$f"
-    sed -i "s|href=\"/blue/summary\"|href=\"${bp}summary.html\"|g"                       "$f"
+    # Blue team section.
+    # /blue/ itself always uses rp (resolves to root then into blue/).
+    # Sub-pages use bp: for pages inside /blue/ this is one level shallower
+    # (they're already in blue/); for pages outside /blue/ bp includes "blue/".
+    sed -i "s|href=\"/blue/\"|href=\"${rp}blue/index.html\"|g"                                       "$f"
+    sed -i "s|href=\"/blue/tsi/\"|href=\"${bp}tsi/index.html\"|g"                                    "$f"
+    sed -i "s|href=\"/blue/anomalies/\"|href=\"${bp}anomalies/index.html\"|g"                        "$f"
+    sed -i "s|href=\"/blue/usability/\"|href=\"${bp}usability/index.html\"|g"                        "$f"
+    sed -i "s|href=\"/blue/dns/\"|href=\"${bp}dns/index.html\"|g"                                    "$f"
+    sed -i "s|href=\"/blue/teaminfo/\"|href=\"${bp}teaminfo/index.html\"|g"                          "$f"
+    sed -i "s|href=\"/blue/download/flags/\"|href=\"${bp}download/flags/index.html\"|g"              "$f"
+    sed -i "s|href=\"/blue/summary\"|href=\"${bp}summary.html\"|g"                                   "$f"
 
-    # Score report link (contains team ID)
+    # Breadcrumb self-link: derive the exact absolute URL this page would have
+    # on the live server, then rewrite it to "./".  Must come before the
+    # generic /reports/team/ rewrite below.
+    sed -i "s|href=\"/${rel_dir}/\"|href=\"./\"|g"                                                   "$f"
+
+    # Score report nav link — points to our team's report page
     sed -i "s|href=\"/reports/team/[0-9]*/\"|href=\"${rp}reports/team/${TEAM_REPORT_ID}/index.html\"|g" "$f"
-
-    # Breadcrumb self-link
-    sed -i "$self_cmd" "$f"
 }
 
 # ── is_login_page FILE ────────────────────────────────────────────────────────
@@ -537,79 +592,24 @@ done
 # 3d — Fix absolute paths in all curl-fetched pages
 #
 # curl doesn't rewrite paths. Every page fetched in Phase 2 has absolute
-# root-relative hrefs and srcs. fix_curl_page() rewrites them all to relative
-# paths using a depth-appropriate prefix, then fixes the breadcrumb self-link.
+# root-relative hrefs and srcs. fix_page() calculates the correct relative
+# prefix from the file's depth and handles all page types uniformly.
+# Running it on a wget-processed page is safe (patterns won't match).
 
-if [[ -n "$COOKIES_FILE" ]]; then
-    # Anomaly detail pages: depth 3 (blue/anomalies/{id}/index.html)
-    ANOMALY_PAGES_FIXED=0
-    for f in "${DEST}/blue/anomalies"/*/index.html; do
-        [[ -f "$f" ]] || continue
-        is_login_page "$f" && continue
-        fix_curl_page 3 's|href="/blue/anomalies/[0-9]*/"|href="./"|g' "$f"
-        (( ANOMALY_PAGES_FIXED++ )) || true
-    done
-    log "  Fixed paths in ${ANOMALY_PAGES_FIXED} anomaly detail page(s)"
-
-    # Submission pages: depth 4 (blue/submit/{type}/{id}/index.html)
-    SUBMIT_PAGES_FIXED=0
-    for f in "${DEST}/blue/submit"/*/*/index.html; do
-        [[ -f "$f" ]] || continue
-        is_login_page "$f" && continue
-        fix_curl_page 4 's|href="/blue/submit/[a-z]*/[0-9]*/"|href="./"|g' "$f"
-        (( SUBMIT_PAGES_FIXED++ )) || true
-    done
-    log "  Fixed paths in ${SUBMIT_PAGES_FIXED} submission page(s)"
-fi
-
-# 3e — Fix absolute paths in other teams' report pages (Phase 2e fetches)
-# These pages sit at reports/team/{id}/index.html (depth 3 from root) but are
-# NOT inside /blue/, so fix_curl_page's bp-based blue/ links are wrong for
-# them. All blue/ nav links must use the full rp prefix (../../blue/...).
-# Also, the breadcrumb self-link uses each team's own report ID, not ours.
-REPORT_PAGES_FIXED=0
-for f in "${DEST}/reports/team"/*/index.html; do
+CURL_PAGES_FIXED=0
+for f in \
+    "${DEST}/blue/anomalies"/*/index.html \
+    "${DEST}/blue/submit"/*/*/index.html \
+    "${DEST}/reports/team"/*/index.html; do
     [[ -f "$f" ]] || continue
-    id=$(basename "$(dirname "$f")")
-    [[ "$id" == "$TEAM_REPORT_ID" ]] && continue   # wget handled ours
     is_login_page "$f" && continue
-
-    # Static assets
-    sed -i "s|href=\"/static/|href=\"../../static/|g" "$f"
-    sed -i "s|src=\"/static/|src=\"../../static/|g"   "$f"
-
-    # Root-level nav
-    sed -i "s|href=\"/\"|href=\"../../index.html\"|g"                                               "$f"
-    sed -i "s|href=\"/logout/\"|href=\"../../logout/index.html\"|g"                                 "$f"
-    sed -i "s|href=\"/messages/\"|href=\"../../messages/index.html\"|g"                             "$f"
-    sed -i "s|href=\"/user_profile/\"|href=\"../../user_profile/index.html\"|g"                     "$f"
-    sed -i "s|href=\"/red/wiki/\"|href=\"../../red/wiki/index.html\"|g"                             "$f"
-    sed -i "s|href=\"/services/status/\"|href=\"../../services/status/index.html\"|g"               "$f"
-
-    # Statistics section
-    sed -i "s|href=\"/statistics/trends/\"|href=\"../../statistics/trends/index.html\"|g"           "$f"
-    sed -i "s|href=\"/statistics/flag/\"|href=\"../../statistics/flag/index.html\"|g"               "$f"
-    sed -i "s|href=\"/statistics/anomalies/\"|href=\"../../statistics/anomalies/index.html\"|g"     "$f"
-    sed -i "s|href=\"/statistics/availability/\"|href=\"../../statistics/availability/index.html\"|g" "$f"
-
-    # Blue team section — full rp prefix since we are NOT inside /blue/
-    sed -i "s|href=\"/blue/\"|href=\"../../blue/index.html\"|g"                                     "$f"
-    sed -i "s|href=\"/blue/tsi/\"|href=\"../../blue/tsi/index.html\"|g"                             "$f"
-    sed -i "s|href=\"/blue/anomalies/\"|href=\"../../blue/anomalies/index.html\"|g"                 "$f"
-    sed -i "s|href=\"/blue/usability/\"|href=\"../../blue/usability/index.html\"|g"                 "$f"
-    sed -i "s|href=\"/blue/dns/\"|href=\"../../blue/dns/index.html\"|g"                             "$f"
-    sed -i "s|href=\"/blue/teaminfo/\"|href=\"../../blue/teaminfo/index.html\"|g"                   "$f"
-    sed -i "s|href=\"/blue/download/flags/\"|href=\"../../blue/download/flags/index.html\"|g"       "$f"
-    sed -i "s|href=\"/blue/summary\"|href=\"../../blue/summary.html\"|g"                            "$f"
-
-    # Self-link first (this team's own report ID → ./), then remaining report
-    # links (shouldn't exist, but catch them anyway) → our team's report
-    sed -i "s|href=\"/reports/team/${id}/\"|href=\"./\"|g"                                         "$f"
-    sed -i "s|href=\"/reports/team/[0-9]*/\"|href=\"../../reports/team/${TEAM_REPORT_ID}/index.html\"|g" "$f"
-
-    (( REPORT_PAGES_FIXED++ )) || true
+    # Our own report was fetched by wget; its absolute paths are already gone,
+    # so fix_page would be a no-op — but skip it explicitly for clarity.
+    [[ "$f" == */reports/team/"${TEAM_REPORT_ID}"/index.html ]] && continue
+    fix_page "$f"
+    (( CURL_PAGES_FIXED++ )) || true
 done
-log "  Fixed paths in ${REPORT_PAGES_FIXED} other team report page(s)"
+log "  Fixed paths in ${CURL_PAGES_FIXED} curl-fetched page(s)"
 
 log "Phase 3 complete."
 echo
