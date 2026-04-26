@@ -151,6 +151,8 @@ DOC_PATTERNS=(
     "intrusion-report-1"
     "intrusion-report-2"
     "intrusion-report-3"
+    "intrusion-report-4"
+    "intrusion-report-5"
     "green-team-documentation"
     "white-team-documentation"
 )
