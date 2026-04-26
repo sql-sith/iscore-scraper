@@ -1,10 +1,15 @@
-# Ignore everything except the scripts and README
+# Ignore everything except tracked files
 *
 !.gitignore
+!CLAUDE.md
+!README.md
 !scrape-iscore.sh
 !probe-other-teams.sh
-!README.md
+!.claude/
+!.claude/settings.json
 !iscore-2026/
 !iscore-2026/02-international-cdc/
 !iscore-2026/02-international-cdc/**
+!iscore-2026/04-highschool-cdc/
+!iscore-2026/04-highschool-cdc/**
 

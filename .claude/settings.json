@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:iscore.iseage.org)",
+      "WebFetch(domain:2025.highschoolhackers.com)",
+      "WebFetch(domain:www.highschoolhackers.com)",
+      "Bash(find:*)",
+      "Bash(sort -k2)",
+      "Bash(grep:*)",
+      "Bash(wc:*)",
+      "Bash(bash:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

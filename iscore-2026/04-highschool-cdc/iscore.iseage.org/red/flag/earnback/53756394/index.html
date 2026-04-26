@@ -1,0 +1,271 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login - IScorE</title>
+    <meta charset="UTF-8" />
+
+    <meta property="og:image" content="/static/img/iscore1_small.png"/>
+    <meta property="og:title" content="Login"/>
+    <meta property="og:url" content="http://iscore.iseage.org/login/?next=/red/flag/earnback/53756394/"/>
+
+    <link rel="icon" href="../../../../static/img/favicon.png"/>
+    <link rel="manifest" href="../../../../static/manifest.json" />
+
+    <link rel="stylesheet" href="../../../../static/CACHE/css/output.3d0579470055.css" type="text/css">
+
+    
+</head>
+<body>
+<input type="hidden" id="applicationServerKey" value="" />
+
+
+<div id="header">
+    <a href="../../../../index.html">
+        
+            <img src="../../../../static/img/iscore1_small.png" alt="IScorE" width="170"
+                 style="margin-top: 20px; margin-left: 20px;"/>
+        
+    </a>
+</div>
+
+<div id="sidebar">
+    <a href="index.html#" class="visible-xs"><i class="icon-home"></i> Login</a>
+    <ul>
+        <li class=""><a href="../../../../index.html"><i
+                class="icon-list"></i>Scoreboard</a></li>
+        <li class="submenu">
+            <a href="index.html#"><i class="icon icon-bar-chart"></i><span>Charts & Graphs</span></a>
+            <ul>
+                <li class=""><a
+                        href="../../../../statistics/trends/index.html">Score Trends</a></li>
+                <li class=""><a
+                        href="../../../../statistics/flag/index.html">Flags</a></li>
+                <li class=""><a
+                        href="../../../../statistics/anomalies/index.html">Anomalies</a></li>
+                <li class=""><a
+                        href="../../../../statistics/availability/index.html">Availability</a></li>
+            </ul>
+        </li>
+        <li class=""><a href="../../../../services/status/index.html"><i
+                class="icon-check"></i>Service Status</a></li>
+        
+        
+
+        
+
+        <!-- Blue Team Area -->
+        
+
+        <!-- Red Team Area -->
+        
+
+        <!-- Green Team Area -->
+        
+
+        <!-- White Team Area -->
+        
+
+        <!-- CDC Admin Area -->
+        
+
+
+    </ul>
+    <!-- Sponsor Area -->
+    
+</div>
+
+
+
+
+
+<div id="content" style="min-height:1000px;">
+     
+        <div id="content-header">
+            <h1>Login</h1>
+
+            <div>
+                
+                <div class="btn-group">
+
+                    
+                        
+                            <a class="btn btn-default btn-large" href="https://signup.iseage.org">Signup</a>
+                        
+                        <a class="btn btn-default btn-large" href="../../../../login.html">Login</a>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+
+        
+
+        <div id="breadcrumb">
+            
+            <a href="../../../../index.html">Home</a><a href="../../../../login.html" class="current">Login</a>
+            
+        </div>
+
+        <!-- Debug bar to see what you are logged in as -->
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+
+                    
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <h5>Login</h5>
+                </div>
+                <div class="widget-content">
+					
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+
+                            <form class="login-form form-horizontal" method="POST">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="x8hs2pgTUoIA5Aft0U9EuVyT72XbEtnGeUdMP9BogVRzg2dbihNwOqCYgi4pVm2p">
+
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label" for="id_username">Username</label>
+                                    <div class="col-xs-8">
+                                        <div class="input-group col-xs-3">
+                                            <input name="username" autofocus="" required="" id="id_username" maxlength="254" type="text" class="form-control"/>
+                                            <span class="input-group-addon">@iseage.org</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label" for="id_password">Password</label>
+                                    <div class="col-xs-8">
+                                        <div class="input-group">
+                                        <input name="password" required="" id="id_password" type="password" class="form-control" style="width: 251px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-offset-3 col-xs-9">
+                                        <input class="btn btn-primary" type="submit" value="Login" />
+                                        
+                                            <a class="btn btn-default btn-large" href="https://signup.iseage.org">Signup</a>
+                                        
+                                    </div>
+
+                                </div>
+
+                                <input type="hidden" name="next" value="" />
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+        
+        
+
+        <div class="modal" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Delete </h3>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    Are you sure you want to delete ""?
+                    <input type="hidden" name="csrfmiddlewaretoken" value="x8hs2pgTUoIA5Aft0U9EuVyT72XbEtnGeUdMP9BogVRzg2dbihNwOqCYgi4pVm2p">
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="submit" class="btn btn-danger" value="Delete" />
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+<script src="../../../../static/CACHE/js/output.e94d0ddd61c0.js"></script>
+
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+
+    $(document).ready(function () {
+
+        
+
+        //setup content height
+        $(window).resize(function () {
+            var new_height = $(window).height() - 55;
+            if (new_height < 675) new_height = 675;
+            $("#content").css('min-height', new_height);
+        });
+
+        $(window).trigger('resize');
+
+        $('input.datepicker-input').datepicker({orientation: "bottom auto"});
+        $('.notifications').each(function () {
+            var that = $(this);
+            var message = that.attr('data-row');
+            var color = that.attr('title');
+            that.notify({
+                message: {text: message},
+                type: color,
+                fadeOut: {enabled: true, delay: 4500}
+            }).show();
+        });
+
+        $('.preview-tab').on('click', function () {
+            var that = $(this);
+            var preview = $(that.attr('href'));
+            var edit = preview.siblings('.tab-pane');
+            var textarea = $('textarea', edit);
+            $('.markdown-content', preview).html(marked(textarea.val()));
+        });
+
+        $('.markdown-content').each(function (i, e) {
+            var item = $(e);
+            item.html(marked(item.html()));
+        });
+    });
+</script>
+
+
+
+    <script>
+        $(document).ready(function(){
+            $('#id_username').focus();
+        });
+    </script>
+
+
+
+</body>
+</html>

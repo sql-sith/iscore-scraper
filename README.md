@@ -3,6 +3,8 @@
 This document explains how to create a reliable offline archive of an IScorE
 competition site (iscore.iseage.org) after each competition.
 
+> NOTE: this repository is currently Linux-only. Many of the filenames that are scraped cannot be stored on NTFS.
+
 ## Prerequisites
 
 ```bash
@@ -208,3 +210,18 @@ Things that may change between competitions and may need updating:
 - **Google Charts dependency** — the Availability page switched from a locally
   bundled charting library (Flot, 2025) to Google Charts (2026). If it switches
   back or to another CDN library, offline rendering behavior will change.
+
+### Running with AI assistance
+
+The script handles the established patterns reliably, but the IScorE site changes
+between competitions in ways that require in-session judgment — page structure
+changes, unexpected server behaviors, or edge cases in the post-processing that
+only surface under specific conditions. Running the script with
+[Claude Code](https://claude.ai/code) is recommended: Claude can interpret
+unexpected output, apply targeted fixes, and recover missed pages without
+restarting the full crawl.
+
+This repo includes a `CLAUDE.md` that gives any Claude Code session immediate
+context about the project, the workflow, and lessons from prior runs — no
+re-explanation needed. If you're using Claude Code, just run `claude` in this
+directory before starting the scrape.

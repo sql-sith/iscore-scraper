@@ -299,7 +299,15 @@ if [[ -n "$COOKIES_FILE" ]]; then
     )
 fi
 
-wget "${WGET_ARGS[@]}" "${SEED_URLS[@]}"
+wget "${WGET_ARGS[@]}" "${SEED_URLS[@]}" || {
+    rc=$?
+    if (( rc == 8 )); then
+        warn "wget exited with code 8 (server errors, e.g. 404s for missing assets) — continuing"
+    else
+        echo "ERROR: wget failed with exit code ${rc}" >&2
+        exit "$rc"
+    fi
+}
 log "Phase 1 complete."
 echo
 
@@ -453,7 +461,7 @@ if [[ -n "$COOKIES_FILE" ]]; then
     if [[ -d "${DEST}/blue/submit" ]]; then
         log "  Fetching uploaded documents (PDFs, etc.)..."
         DOC_PATHS=$(grep -roh 'upload/docs/[^"]*' "${DEST}/blue/submit/" 2>/dev/null \
-            | sed 's|.*/upload/docs/|/static/upload/docs/|' | sort -u || true)
+            | sed 's|.*upload/docs/|/static/upload/docs/|' | sort -u || true)
         DOC_OK=0
         DOC_WARN=0
         for doc in $DOC_PATHS; do

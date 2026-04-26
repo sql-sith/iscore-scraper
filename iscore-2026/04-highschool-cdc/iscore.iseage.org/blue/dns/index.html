@@ -1,0 +1,772 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DNS Records - IScorE</title>
+    <meta charset="UTF-8" />
+
+    <meta property="og:image" content="/static/img/iscore1_small.png"/>
+    <meta property="og:title" content="DNS Records"/>
+    <meta property="og:url" content="http://iscore.iseage.org/blue/dns/"/>
+
+    <link rel="icon" href="../../static/img/favicon.png"/>
+    <link rel="manifest" href="../../static/manifest.json" />
+
+    <link rel="stylesheet" href="../../static/CACHE/css/output.3d0579470055.css" type="text/css">
+
+    
+</head>
+<body>
+<input type="hidden" id="applicationServerKey" value="BIl3fUZ225yzs0YYIg4FjdvSfNhs-6Kb7zpDZO9nXel0K6fMdqo-nwYLzfmv0m2bQg3qJyPB9Gi8cc572maWsKw" />
+
+
+<div id="header">
+    <a href="../../index.html">
+        
+            <img src="../../static/img/iscore1_small.png" alt="IScorE" width="170"
+                 style="margin-top: 20px; margin-left: 20px;"/>
+        
+    </a>
+</div>
+
+<div id="sidebar">
+    <a href="index.html#" class="visible-xs"><i class="icon-home"></i> DNS Records</a>
+    <ul>
+        <li class=""><a href="../../index.html"><i
+                class="icon-list"></i>Scoreboard</a></li>
+        <li class="submenu">
+            <a href="index.html#"><i class="icon icon-bar-chart"></i><span>Charts & Graphs</span></a>
+            <ul>
+                <li class=""><a
+                        href="../../statistics/trends/index.html">Score Trends</a></li>
+                <li class=""><a
+                        href="../../statistics/flag/index.html">Flags</a></li>
+                <li class=""><a
+                        href="../../statistics/anomalies/index.html">Anomalies</a></li>
+                <li class=""><a
+                        href="../../statistics/availability/index.html">Availability</a></li>
+            </ul>
+        </li>
+        <li class=""><a href="../../services/status/index.html"><i
+                class="icon-check"></i>Service Status</a></li>
+        
+            <li class=""><a href="../../red/wiki/index.html"><i
+                    class="icon-edit"></i>Red Wiki</a></li>
+        
+        
+
+        
+            <li class=""><a href="../../user_profile/index.html"><i
+                    class="icon-user"></i> User Profile</a></li>
+            <li>&nbsp;</li>
+        
+
+        <!-- Blue Team Area -->
+        
+            
+        <li class=""><a href="../index.html"><i
+                class="icon-th"></i> Dashboard</a></li>
+        <li class=""><a href="../tsi/index.html"><i
+                class="icon-credit-card"></i> Team Specific Info</a></li>
+        <li class=""><a href="../anomalies/index.html"><i
+                class="icon-asterisk"></i> Anomalies</a></li>
+        <li class=""><a href="../usability/index.html"><i
+                class="icon-check"></i> Usability </a></li>
+        <li class="active"><a href="index.html"><i
+                class="icon-wrench"></i> DNS Records</a></li>
+        <li class=""><a href="../teaminfo/index.html"><i
+                class="icon-pencil"></i> Team Info</a></li>
+        <li class=""><a
+                href="../download/flags/index.html"><i class="icon-download-alt"></i> Download Flags</a></li>
+        
+            <li class=""><a
+                    href="../../reports/team/1071/index.html"><i class="icon-list-alt"></i> Score Report</a></li>
+        
+        
+            <li class=""><a
+                    href="../summary.html"><i class="icon-flag"></i> Red Summary</a></li>
+        
+        
+        
+
+        <!-- Red Team Area -->
+        
+
+        <!-- Green Team Area -->
+        
+
+        <!-- White Team Area -->
+        
+
+        <!-- CDC Admin Area -->
+        
+
+
+    </ul>
+    <!-- Sponsor Area -->
+    
+        <div class="sponsor-logos" style="width: inherit">
+            <div class="sponsor-header">
+                Generously Sponsored By:
+            </div>
+
+            <div class="carousel slide sponsor-images">
+                <div class="carousel-inner" style="height: 80px">
+                    
+                        <div class="item active">
+                            <a href=https://www.collinsaerospace.com/ target="_blank">
+                                <img class="item active  center-block"
+                                     id="sponsor_3" src="../../static/upload/sponsorlogos/CA-Logo_rgb-black_x2qdaZd.png"
+                                     height="" style="margin: auto;None"
+                                     alt="Collins"/>
+                            </a>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+
+
+
+
+<div id="content" style="min-height:1000px;">
+     
+        <div id="content-header">
+            <h1>DNS Records</h1>
+
+            <div>
+                
+                <div class="btn-group">
+
+                    
+                        
+<a class="btn btn-default btn-large dropdown-toggle" data-toggle="dropdown" href="index.html#">Messages <span class="label label-important">35</span></a>
+    <ul class="dropdown-menu" id="message-dropdown">
+    
+        <li class="message-item">
+            <a href="../../goto_message/60863/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Where am I? #1</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/60913/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Get a Life</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/60815/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Heartbeat</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/60966/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Rules, Rules, Rules #1</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61018/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Knight&#x27;s Tour</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61070/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Where Am I? #2</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62606/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Rules, Rules, Rules #3</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61229/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Lost Driver</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61281/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>A fox shaped conscript Pt.1</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62660/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Printer Help!</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62714/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Back in My Day</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61396/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>TUX PAINT</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61448/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Break In</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61500/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>What&#x27;s my password?</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61552/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>A fox shaped conscript Pt.2</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61648/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Board Gamer</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62768/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>ENIGMA</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61701/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Board Gamer</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61782/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Scrat vs Acorn</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61835/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Green Meme Submission</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61888/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>MAZE</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/61961/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Rules, Rules, Rules #2</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62161/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Empty File</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62274/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Movie Reflection</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62327/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Get a Job</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62380/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>The Walls are Speaking to Me</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62456/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Orgins</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62841/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Mysterious Note</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62895/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Red Meme Submission</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/62949/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Artemis</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/63119/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Image Me</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/63173/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Feedback Loop</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/63227/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Touch Grass</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/63363/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>White Meme Submission</span>
+            </a>
+        </li>
+    
+        <li class="message-item">
+            <a href="../../goto_message/63539/index.html">
+                <span class="message-info">New Anomaly!</span><br />
+                <span>Alumi Memes</span>
+            </a>
+        </li>
+    
+        <li class="divider"></li>
+        <li><a href="../../messages/index.html">See All Messages</a></li>
+    </ul>
+
+                        <a class="btn btn-default btn-large" href="../../logout/index.html">Logout</a>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+
+        
+
+        <div id="breadcrumb">
+            
+            <a href="../../index.html">Home</a><a href="../index.html">Team 9 Dashboard</a><a href="index.html" class="current">DNS Records</a>
+            
+                <span class="pull-right" style="margin-top: 7px; margin-right: 20px">Logged in as: sky.kaptin</span>
+            
+        </div>
+
+        <!-- Debug bar to see what you are logged in as -->
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+
+                    
+
+    
+        <style>
+            #add-dns-form .control-label {
+                padding-top: 15px;
+                width: 10%;
+            }
+            #add-dns-form .controls {
+                margin-left: 18%;
+                padding: 10px 0;
+            }
+            #add-dns-form .widget-content.nopadding .form-actions {
+                padding-left: 125px;
+            }
+        </style>
+        <div class="row">
+            <div class="col-md-4">
+                <form class="form-horizontal" action='index.html' method="POST" id="add-dns-form">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                    
+                    
+
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"><i class="icon-plus"></i></span>
+        <h5>Add DNS Record</h5>
+    </div>
+
+    <div class="widget-content nopadding">
+        <div class="widget-content" style="border-bottom: none;">
+            
+        </div>
+
+        <div class="crispy-form-wrapper">
+
+<form  class="form-horizontal" method="post" > <div id="div_id_type" class="form-group"> <label for="id_type" class="control-label col-sm-2 requiredField">
+                Type<span class="asteriskField">*</span> </label> <div class="controls col-sm-8"> <select name="type" class="select form-control" id="id_type"> <option value="A">A</option> <option value="CNAME">CNAME</option> <option value="TXT">TXT</option>
+
+</select> </div> </div> <div id="div_id_name" class="form-group"> <label for="id_name" class="control-label col-sm-2 requiredField">
+                Name<span class="asteriskField">*</span> </label> <div class="controls col-sm-8"> <div class="input-group"><input type="text" class="form-control" id="id_name" name="name" value="" required /> <span class="input-group-addon">.team9.isucdc.com</span></div> </div> </div> <div id="div_id_value" class="form-group"> <label for="id_value" class="control-label col-sm-2">
+                Value
+            </label> <div class="controls col-sm-8"> <div class="input-group"><span class="input-group-addon">33.96.50.</span><input type="text" class="form-control"  id="id_value" name="value" value="" /> </div> </div> </div> <div id="div_id_c_value" class="form-group"> <label for="id_c_value" class="control-label col-sm-2">
+                Value
+            </label> <div class="controls col-sm-8"> <select name="c_value" class="hidden select form-control" id="id_c_value"> <option value="ad">ad</option> <option value="www">www</option> <option value="lp">lp</option> <option value="wms">wms</option> <option value="db">db</option> <option value="Elastic">Elastic</option> <option value="n8n">n8n</option> <option value="router">router</option> <option value="scan">scan</option>
+
+</select> </div> </div> </form>
+</div>
+
+        <div class="form-actions">
+    <input type="submit" value="Submit" class="btn btn-primary" style="" />
+    
+    
+</div>
+    </div>
+</div>
+                </form>
+            </div>
+
+
+            <div class="col-md-8">
+                <div class="widget-box dashboard-widget">
+                    <div class="widget-title">
+                        <span class="icon">
+                            <i class="icon-th"></i>
+                        </span>
+                        <h5>DNS Records</h5>
+                    </div>
+                    <div class="widget-content">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Value</th>
+                                <th style="width:200px;">Actions</th>
+                            </tr>
+                            
+                                <tr id="record-4522">
+                                    <td class="name">ad</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.10</td>
+                                    <td>
+                                        <button type="button" data-id="4522" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4522" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4562">
+                                    <td class="name">www</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.20</td>
+                                    <td>
+                                        <button type="button" data-id="4562" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4562" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4602">
+                                    <td class="name">lp</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.30</td>
+                                    <td>
+                                        <button type="button" data-id="4602" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4602" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4642">
+                                    <td class="name">wms</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.40</td>
+                                    <td>
+                                        <button type="button" data-id="4642" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4642" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4682">
+                                    <td class="name">db</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.50</td>
+                                    <td>
+                                        <button type="button" data-id="4682" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4682" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4722">
+                                    <td class="name">Elastic</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.70</td>
+                                    <td>
+                                        <button type="button" data-id="4722" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4722" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4723">
+                                    <td class="name">n8n</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.80</td>
+                                    <td>
+                                        <button type="button" data-id="4723" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4723" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4724">
+                                    <td class="name">router</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.250</td>
+                                    <td>
+                                        <button type="button" data-id="4724" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4724" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                                <tr id="record-4725">
+                                    <td class="name">scan</td>
+                                    <td class="type">A</td>
+                                    <td class="value">33.96.50.240</td>
+                                    <td>
+                                        <button type="button" data-id="4725" class="btn btn-primary edit-button">Edit</button>
+                                        <form method="POST" action="https://iscore.iseage.org/blue/dns/delete/(4725" style="display:inline;">
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                                            <button type="submit" class="btn btn-danger delete-button">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+                </div>
+            </div>
+        </div>
+
+        
+        
+        
+        
+        
+
+        <div class="modal" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Delete </h3>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    Are you sure you want to delete ""?
+                    <input type="hidden" name="csrfmiddlewaretoken" value="wMFwiJYf4y7DDa3PEF3AIggXHvBkLWs5dyBQ5tjKq5gCOC1xW2Hs2Lk2QLIy2P7O">
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="submit" class="btn btn-danger" value="Delete" />
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+<script src="../../static/CACHE/js/output.e94d0ddd61c0.js"></script>
+
+
+    <script src="../../static/scripts/iscore-notifications.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+
+    $(document).ready(function () {
+
+        
+            $('.carousel').carousel({
+                interval: 3000});
+        
+
+        //setup content height
+        $(window).resize(function () {
+            var new_height = $(window).height() - 55;
+            if (new_height < 675) new_height = 675;
+            $("#content").css('min-height', new_height);
+        });
+
+        $(window).trigger('resize');
+
+        $('input.datepicker-input').datepicker({orientation: "bottom auto"});
+        $('.notifications').each(function () {
+            var that = $(this);
+            var message = that.attr('data-row');
+            var color = that.attr('title');
+            that.notify({
+                message: {text: message},
+                type: color,
+                fadeOut: {enabled: true, delay: 4500}
+            }).show();
+        });
+
+        $('.preview-tab').on('click', function () {
+            var that = $(this);
+            var preview = $(that.attr('href'));
+            var edit = preview.siblings('.tab-pane');
+            var textarea = $('textarea', edit);
+            $('.markdown-content', preview).html(marked(textarea.val()));
+        });
+
+        $('.markdown-content').each(function (i, e) {
+            var item = $(e);
+            item.html(marked(item.html()));
+        });
+    });
+</script>
+
+
+
+    
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#id_name').focus();
+
+                $('.edit-button').click(function(){
+                    var row_id = $(this).attr('data-id');
+                    $('#record-' + row_id).children('td').each(function(){
+                        var that = $(this)
+                        if(that.attr('class') == 'name'){
+                            $('#id_name').val(that.html());
+                        }
+                        if(that.attr('class') == 'type'){
+                            $('#id_type').val(that.html()).trigger('change');
+                        }
+                        if(that.attr('class') == 'value'){
+                            if(that.parent().find('.type').html() == 'CNAME'){
+                                $('#id_c_value').val(that.html());
+                            }
+                            else {
+                                $('#id_value').val(that.html().split('.')[3]);
+                            }
+                        }
+                        $("#id_value").focus();
+                    });
+                });
+
+                $('#id_type').on('change', process_type_change);
+                process_type_change();
+
+            });
+
+            function process_type_change(){
+                var that = $('#id_type');
+                if (that.val() == 'CNAME'){
+                    $('#div_id_value').addClass('hidden');
+                    $('#div_id_c_value').removeClass('hidden').find('select').removeClass('hidden');
+                }
+                else {
+                    $('#div_id_c_value').addClass('hidden');
+                    $('#div_id_value').removeClass('hidden');
+                }
+                if (that.val() == 'TXT'){
+                    $('#div_id_value').find('.input-group-addon').addClass('hidden')()
+                }
+                else{
+                    $('#div_id_value').find('.input-group-addon').removeClass('hidden')
+                }
+            }
+        </script>
+    
+
+
+
+</body>
+</html>

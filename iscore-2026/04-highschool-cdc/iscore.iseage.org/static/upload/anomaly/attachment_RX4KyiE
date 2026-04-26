@@ -1,0 +1,48 @@
+<?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $password2 = $_POST['password2'] ?? '';
+    $salt = 2797;
+    $hashedPassword = hash('md5', $salt . $password);
+    $hashedPassword2 = hash('md5', $salt . $password2);
+
+    if ($username === 'admin' && $password != $password2 && $hashedPassword == $hashedPassword2) {
+        $_SESSION['username'] = $username;
+        header('Location: <Secret>');
+        exit;
+    } else {
+        $error = "Invalid username or passwords.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <?php if (!empty($error)) : ?>
+        <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
+    <form method="POST" action="">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Password:</label>
+	<input type="password" id="password" name="password" required><br><br>
+
+	<label for="password2">Password2:</label>
+	<input type="password" id="password2" name="password2" required><br><br>
+        
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+

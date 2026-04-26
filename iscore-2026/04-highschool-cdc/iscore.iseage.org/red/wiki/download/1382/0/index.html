@@ -1,0 +1,26 @@
+Write-Host "Label Service Started..."
+
+$scriptPath = "C:\Labels"
+$processed = @{}
+$zplService = "C:\Labels\zplService.ps1"
+
+while ($true) {
+    try {
+        # Run zplService every cycle
+        if (Test-Path $zplService) {
+            & $zplService
+        }
+
+        Get-ChildItem -Path $scriptPath -Filter *.ps1 -Recurse | ForEach-Object {
+            if (-not $processed.ContainsKey($.FullName)) {
+                Write-Host "Running $($.Name)..."
+                & $.FullName
+                $processed[$.FullName] = Get-Date
+            }
+        }
+    } catch {
+        Write-Warning "Processing error occurred: $_"
+    }
+
+    Start-Sleep -Seconds 3 # check for new files every 3 seconds
+}
