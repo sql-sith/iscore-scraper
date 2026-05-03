@@ -12,7 +12,9 @@
 #   -u URL    Base URL of the IScorE site  (default: https://iscore.iseage.org)
 #   -c FILE   Path to a Netscape-format cookies file (required to capture
 #             authenticated pages: /blue/, /red/wiki/, /messages/, etc.)
-#   -o DIR    Output directory             (default: iscore-YYYY)
+#   -o DIR    Output directory             (default: output/YYYY/iscore)
+#             The site mirror lands at <DIR>/iscore.iseage.org/. For per-
+#             competition archives, pass e.g. -o output/2026/iscore/02-international-cdc
 #   -r ID     Team score report ID         (default: 1004)
 #   -w N      Wait N seconds between wget requests to be polite  (default: 1)
 #   -i        Insecure mode (skip certificate checks)
@@ -26,7 +28,7 @@ set -euo pipefail
 # ── Defaults ──────────────────────────────────────────────────────────────────
 SITE_URL="https://iscore.iseage.org"
 YEAR=$(date +%Y)
-OUTPUT_DIR="iscore-${YEAR}"
+OUTPUT_DIR="output/${YEAR}/iscore"
 COOKIES_FILE=""
 WAIT=1
 TEAM_REPORT_ID="1004"   # ID in /reports/team/{id}/ — appears in nav links

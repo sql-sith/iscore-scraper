@@ -7,18 +7,24 @@ their scoreboard, anomaly history, and submission records.
 ## Key Files
 
 - `scrape-iscore.sh` — five-phase archive script (see below)
+- `probe-other-files.sh` — probes other teams' artifacts visible to a logged-in user
 - `README.md` — instructions for running the scraper and hosting the output
-- `iscore-2026/` — competition archives, one subdirectory per event
+- `output/` — competition archives and probe results, organized by year and event
 
 ## Archive Folder Convention
 
+All output lives under `output/`, split by year and tool:
+
 ```
-iscore-YYYY/NN-competition-name/iscore.iseage.org/
+output/YYYY/iscore/NN-competition-name/iscore.iseage.org/   # scrape-iscore.sh
+output/YYYY/probe/NN-competition-name/{reports,static}/     # probe-other-files.sh
 ```
 
 `NN` is a two-digit sequence number within the year (02, 04, …). Examples:
-- `iscore-2026/02-international-cdc/`
-- `iscore-2026/04-highschool-cdc/`
+- `output/2026/iscore/02-international-cdc/iscore.iseage.org/`
+- `output/2026/iscore/04-highschool-cdc/iscore.iseage.org/`
+- `output/2026/probe/02-international-cdc/`
+- `output/2026/probe/04-highschool-cdc/`
 
 Always confirm the target folder, team number, and report ID with the user before running.
 
@@ -27,7 +33,7 @@ Always confirm the target folder, team number, and report ID with the user befor
 `scrape-iscore.sh` takes these key flags:
 
 ```bash
-./scrape-iscore.sh -c cookies.txt -o iscore-YYYY/NN-name -r REPORT_ID
+./scrape-iscore.sh -c cookies.txt -o output/YYYY/iscore/NN-name -r REPORT_ID
 ```
 
 | Flag | Purpose |
@@ -81,14 +87,14 @@ changes between competitions. Things to watch for:
 
 | Competition | Team # | Report ID | Folder |
 |------------|--------|-----------|--------|
-| International CDC 2026 | 24 | 1004 | `iscore-2026/02-international-cdc` |
-| Highschool CDC 2026 | 9 | 1071 | `iscore-2026/04-highschool-cdc` |
+| International CDC 2026 | 24 | 1004 | `output/2026/iscore/02-international-cdc` |
+| Highschool CDC 2026 | 9 | 1071 | `output/2026/iscore/04-highschool-cdc` |
 
 Login: `sky.kaptin` — refresh cookies from browser before each run.
 
 ## Serving Locally
 
 ```bash
-cd iscore-2026/04-highschool-cdc && python3 -m http.server 8080
+cd output/2026/iscore/04-highschool-cdc && python3 -m http.server 8080
 # open http://localhost:8080/iscore.iseage.org/
 ```

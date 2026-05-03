@@ -18,8 +18,12 @@
 # Options:
 #   -u URL    Base URL of the IScorE site     (default: https://iscore.iseage.org)
 #   -c FILE   Path to a Netscape-format cookies file (required)
-#   -a DIR    Path to local archive directory (default: iscore-YYYY/iscore.iseage.org)
-#   -o DIR    Output directory for findings   (default: probe-YYYY)
+#   -a DIR    Path to local archive directory (default: output/YYYY/iscore/iscore.iseage.org)
+#             For per-competition archives, pass e.g.
+#             -a output/2026/iscore/02-international-cdc/iscore.iseage.org
+#   -o DIR    Output directory for findings   (default: output/YYYY/probe)
+#             For per-competition output, pass e.g.
+#             -o output/2026/probe/02-international-cdc
 #   -i        Insecure mode (ignore certificate validation)
 #   -t ID     Our own team report ID to skip  (default: 1004)
 #   -h        Show this help
@@ -29,8 +33,8 @@ set -euo pipefail
 # ── Defaults ──────────────────────────────────────────────────────────────────
 SITE_URL="https://iscore.iseage.org"
 YEAR=$(date +%Y)
-ARCHIVE_DIR="iscore-${YEAR}/iscore.iseage.org"
-OUTPUT_DIR="probe-${YEAR}"
+ARCHIVE_DIR="output/${YEAR}/iscore/iscore.iseage.org"
+OUTPUT_DIR="output/${YEAR}/probe"
 OUR_REPORT_ID="1004"
 COOKIES_FILE=""
 INSECURE=false

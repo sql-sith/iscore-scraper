@@ -7,14 +7,6 @@
 !probe-other-files.sh
 !.claude/
 !.claude/settings.json
-!iscore-2026/
-!iscore-2026/02-international-cdc/
-!iscore-2026/02-international-cdc/**
-!iscore-2026/04-highschool-cdc/
-!iscore-2026/04-highschool-cdc/**
-!probe-2026/
-!probe-2026/02-international-cdc/
-!probe-2026/02-international-cdc/**
-!probe-2026/04-highschool-cdc/
-!probe-2026/04-highschool-cdc/**
+!output/
+!output/**
 

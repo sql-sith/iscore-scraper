@@ -25,10 +25,14 @@ brew install wget curl
 ./scrape-iscore.sh -c cookies.txt
 ```
 
-Output goes to `iscore-YYYY/` by default. To preview it locally:
+Output goes to `output/YYYY/iscore/` by default. The site mirror lands under
+`<output>/iscore.iseage.org/`. For per-competition archives, point `-o` at a
+named subdirectory (e.g. `-o output/2026/iscore/02-international-cdc`).
+
+To preview the archive locally:
 
 ```bash
-cd iscore-YYYY/iscore.iseage.org/
+cd output/YYYY/iscore/iscore.iseage.org/
 python3 -m http.server 8080
 # open http://localhost:8080/iscore.iseage.org/
 # Ctrl-C in the Python window when you want to close the web server.
@@ -110,7 +114,7 @@ token and you'll need to use Method 1 instead.
 
   -u URL    Base URL of the IScorE site  (default: https://iscore.iseage.org)
   -c FILE   Path to cookies file         (default: none, public pages only)
-  -o DIR    Output directory             (default: iscore-YYYY)
+  -o DIR    Output directory             (default: output/YYYY/iscore)
   -w N      Seconds to wait between requests (default: 1)
   -h        Show help
 ```
@@ -118,11 +122,11 @@ token and you'll need to use Method 1 instead.
 ### Examples
 
 ```bash
-# Archive to a custom directory
-./scrape-iscore.sh -c cookies.txt -o 2026-competition
+# Archive a specific competition under the canonical layout
+./scrape-iscore.sh -c cookies.txt -o output/2026/iscore/02-international-cdc
 
-# Archive a different year's site
-./scrape-iscore.sh -u https://iscore.iseage.org -c cookies.txt -o iscore-2026
+# Archive to an entirely custom directory
+./scrape-iscore.sh -c cookies.txt -o 2026-competition
 
 # Faster (less polite) — only if you're confident the server can handle it
 ./scrape-iscore.sh -c cookies.txt -w 0
@@ -145,7 +149,8 @@ No path editing needed in either case.
 
 ```bash
 # The content to serve is inside the site hostname subdirectory
-rsync -av iscore-2026/iscore.iseage.org/ user@server:/var/www/html/2026/
+rsync -av output/2026/iscore/04-highschool-cdc/iscore.iseage.org/ \
+      user@server:/var/www/html/2026/
 ```
 
 ---
